@@ -10,7 +10,7 @@ object BambooLogDownloader {
 
   def downloadLog(url: String): Option[Iterator[String]] = {
     try {
-      println("Downloading " + url);
+      //println("Downloading " + url);
       return Some(scala.io.Source.fromURL(url, "utf-8").getLines)
     } catch {
       case e: Throwable => { e.printStackTrace(); }
