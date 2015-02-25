@@ -6,8 +6,7 @@
  $ node --version
  v0.12.0
 
- $ babel ConvertFieldsToGetters.es6.js  > ConvertFieldsToGetters.es5.js
- $ node ConvertFieldsToGetters.es5.js
+ $ babel ConvertFieldsToGetters.es6.js  > ConvertFieldsToGetters.es5.js && node ConvertFieldsToGetters.es5.js
 
  */
 
@@ -80,3 +79,12 @@ var runTests = function () {
 
 };
 runTests();
+
+const input = `
+`;
+
+
+// Convert Getters:
+input.split("\n").map(line => convertToGetterIfPossible(line)).forEach(line =>console.log(line))
+// Convert assignment to mocks:
+//input.split("\n").map(line =>convertFieldAssignmentToGetterMocking(line)).forEach(line=>console.log(line))

@@ -1,15 +1,20 @@
 object ConvertFieldsToGetters {
   def main(args: Array[String]) = {
-    runTests();
+    // runTests();
 
     val input = """
+
+  @Documentation("The doc1.")
+  public My my;
+
+  @Documentation("The doc2.")
+  public int value; 
     """
 
     // Convert Getters:
     input.split("\r\n").map(convertToGetterIfPossible(_)).foreach(println(_))
 
     // Convert assignment to mocks:
-
     // input.split("\r\n").map(convertFieldAssignmentToGetterMocking(_)).foreach(println(_))    
 
   }
