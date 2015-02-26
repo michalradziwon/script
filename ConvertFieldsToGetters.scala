@@ -11,11 +11,14 @@ object ConvertFieldsToGetters {
   public int value; 
     """
 
-    // Convert Getters:
-    input.split("\r\n").map(convertToGetterIfPossible(_)).foreach(println(_))
+    def convertAllPublicFieldsToGetters(lines : Seq[String]) = lines.map(convertToGetterIfPossible(_))
+    def convertAllFieldAssignmentToGetterMocking(lines : Seq[String]) = lines.map(convertFieldAssignmentToGetterMocking(_))
 
-    // Convert assignment to mocks:
-    // input.split("\r\n").map(convertFieldAssignmentToGetterMocking(_)).foreach(println(_))    
+    // Select the commend here:
+    val command = convertAllPublicFieldsToGetters _
+    val lines = input.split("\n")
+    // Executes a given command and prints it to std out:
+    command(lines).foreach(println(_))
 
   }
 
