@@ -1,6 +1,6 @@
 object ConvertFieldsToGetters {
   def main(args: Array[String]) = {
-    // runTests();
+    runTests();
 
     val input = """
 
@@ -9,18 +9,39 @@ object ConvertFieldsToGetters {
 
   @Documentation("The doc2.")
   public int value; 
+
+  @Test
+  public void shouldTestSomething() {
+    some.code();
+  }
     """
 
     def convertAllPublicFieldsToGetters(lines : Seq[String]) = lines.map(convertToGetterIfPossible(_))
     def convertAllFieldAssignmentToGetterMocking(lines : Seq[String]) = lines.map(convertFieldAssignmentToGetterMocking(_))
+    // createTestMethodCommentsBasedOnTestMethodName
 
     // Select the commend here:
-    val command = convertAllPublicFieldsToGetters _
-    val lines = input.split("\n")
+    val command = createTestMethodCommentsBasedOnTestMethodName _
+    val lines = input.split("\r\n").toList
     // Executes a given command and prints it to std out:
     command(lines).foreach(println(_))
 
+
   }
+
+  def createTestMethodCommentsBasedOnTestMethodName(lines : List[String]) = {
+    lines.zip(""::lines).map(withPrev=>if(withPrev._2.contains("@Test")) List(createTestMethodComment(withPrev._1), withPrev._1) else if(withPrev._1.contains("@Test")) List() else List(withPrev._1)).flatten
+  }
+
+  def createTestMethodComment(methodSignatureLine : String) = {
+    val comment = lookForMethodNameInSignatureAssignment(methodSignatureLine).get.toList.map(i=>if(i.isUpper) " " + i.toLower else i).mkString.trim.capitalize + "."
+    s"""
+  /**
+   * ${comment} 
+   */
+   @Test"""
+ }
+  
 
   def convertFieldAssignmentToGetterMocking(line: String) = {
     lookForAssignment(line) match {
@@ -28,6 +49,17 @@ object ConvertFieldsToGetters {
       case Some((variable, field, value)) => s"when($variable.${mapFieldNameToGetter(field, None)}()).thenReturn($value);"
     }
   }
+
+  def lookForMethodNameInSignatureAssignment(signatureLine: String) = {
+    val Line = """\s*(\w*)\s+void\s+([\w]+).*""".r
+    try {
+      val Line(typee, methodName) = signatureLine
+      Some(methodName)
+    } catch {
+      case _: Throwable => None
+    }
+  }
+  
 
   def lookForAssignment(in: String) = {
     val Line = """\s*([\w]+)\.([\w]+) = ([^;]+).*""".r
@@ -66,8 +98,8 @@ object ConvertFieldsToGetters {
 
   def runTests() {
     def testEq(act: Object, exp: Object) {
-//      println("Act " + act + "\nExp " + exp)
-      assert(exp == act, { println("Exp   : " + exp); println("Actual: " + act) })
+     // println("Act " + act + "\nExp " + exp + "\n" + (""+act).length + "/" + (""+exp).length)
+      assert(exp == act, { println("Exp   : '" + exp+"'"); println("Actual: '" + act + "'") })
     }
 
     testEq(lookForFieldDefinition("""public Date                              myDateField;"""),
@@ -91,5 +123,14 @@ object ConvertFieldsToGetters {
     testEq(convertFieldAssignmentToGetterMocking("""    myVar.fieldOne = newValueProvider.getX();"""),
       """when(myVar.getFieldOne()).thenReturn(newValueProvider.getX());""")
 
+    testEq(lookForMethodNameInSignatureAssignment("  public void shouldReturnPendingReportCodesBySystemDate() {"),
+      Some("shouldReturnPendingReportCodesBySystemDate"))
+
+    testEq(createTestMethodComment("""public void shouldReturnCorrectStateForPendingReport() {"""),
+      """
+  /**
+   * Should return correct state for pending report. 
+   */
+   @Test""")
   }
 }
