@@ -1,0 +1,11 @@
+{
+  "name": "ConvertFieldsToGetters",
+  "version": "0.0.1",
+  "description": "Script used for a re-factoring.",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-rename": "^1.2.0"
+  },
+  "dependencies": {}
+}
