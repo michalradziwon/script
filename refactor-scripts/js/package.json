@@ -1,5 +1,5 @@
 {
-  "name": "ConvertFieldsToGetters",
+  "name": "refactor-scripts",
   "version": "0.0.1",
   "description": "Script used for a re-factoring.",
   "devDependencies": {
