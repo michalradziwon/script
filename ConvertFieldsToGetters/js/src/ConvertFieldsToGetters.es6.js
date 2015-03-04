@@ -1,15 +1,3 @@
-/*
- How to run in nodejs with babel ES5 to ES6 compiler:
- $ npm install --global babel assert
- $ babel --version
- 4.3.0
- $ node --version
- v0.12.0
-
- $ babel ConvertFieldsToGetters.es6.js  > ConvertFieldsToGetters.es5.js && node ConvertFieldsToGetters.es5.js
-
- */
-
 var convertFieldAssignmentToGetterMocking = function (line) {
   var res = lookForAssignment(line);
   if (res) {
@@ -78,13 +66,16 @@ var runTests = function () {
     "when(myVar.getFieldOne()).thenReturn(newValueProvider.getX());");
 
 };
+
+
 runTests();
 
 const input = `
+ abc
 `;
 
 
 // Convert Getters:
-input.split("\n").map(line => convertToGetterIfPossible(line)).forEach(line =>console.log(line))
+input.split("\n").map(line => convertToGetterIfPossible(line)).forEach(line =>console.log(line));
 // Convert assignment to mocks:
 //input.split("\n").map(line =>convertFieldAssignmentToGetterMocking(line)).forEach(line=>console.log(line))
