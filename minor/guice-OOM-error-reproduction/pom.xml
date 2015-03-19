@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.michalradziwon.guice.error</groupId>
+    <artifactId>guice-error</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>guice-error</name>
+    <description>Reproduction of the 'OutOfMemoryError in com.google.inject.internal.Errors' issue (https://github.com/google/guice/issues/850)</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <properties>
+        <java.version>1.6</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+</project>
