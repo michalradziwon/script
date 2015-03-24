@@ -10,7 +10,8 @@ public class A {
   }
 
   @Inject
-  void inject(B b, IC c){
+  void inject(B b/*, IC c*/){
+
   }
 
 }
