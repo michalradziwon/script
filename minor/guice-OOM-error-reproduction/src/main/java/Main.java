@@ -1,4 +1,5 @@
 import gen.A;
+import gen.HasReferenceToAllGroups;
 
 import java.util.Arrays;
 
@@ -10,17 +11,22 @@ import com.google.inject.internal.InternalInjectorCreator;
 
 public class Main {
   public static void main(String[] args) {
-    System.out.println("Creating injector...");
     long start = System.currentTimeMillis();
-    Injector injector = createInjector(new MyModule());
-    long stop = System.currentTimeMillis();
-    System.out.println(String.format("Injector created in %dms", stop - start));
+    try {
+      System.out.println("Creating injector...");
+      Injector injector = createInjector(new MyModule());
+      long stop = System.currentTimeMillis();
+      System.out.println(String.format("Injector created in %dms", stop - start));
 
 
-    A instance = injector.getInstance(A.class);
-    System.out.println("Got " + instance);
-    injector.getInstance(gen.GenClient.class);
-    System.out.println("application was operating for " + (System.currentTimeMillis() - start) + " ms.");
+      A instance = injector.getInstance(A.class);
+      System.out.println("Got " + instance);
+      injector.getInstance(HasReferenceToAllGroups.class);
+      System.out.println("application was operating for " + (System.currentTimeMillis() - start) + " ms.");
+    } catch (Throwable e) {
+      System.out.println(String.format("Exploded after %dms", System.currentTimeMillis() - start));
+      e.printStackTrace();
+    }
 
 
 
@@ -92,7 +98,7 @@ Caused by: java.lang.ArrayIndexOutOfBoundsException: 34601
     @Override
     protected void configure() {
       bind(A.class);
-      bind(gen.GenClient.class);
+//      bind(gen.GenClient.class);
     }
   }
 }
