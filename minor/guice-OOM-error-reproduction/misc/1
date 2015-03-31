@@ -1,0 +1,25 @@
+Creating injector...
+Injector created in 187ms
+Got gen.A@4e17e4ca
+Exploded after 89335ms
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:2882)
+	at java.lang.AbstractStringBuilder.expandCapacity(AbstractStringBuilder.java:100)
+	at java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:390)
+	at java.lang.StringBuilder.append(StringBuilder.java:119)
+	at java.lang.StringBuilder.append(StringBuilder.java:167)
+	at java.lang.StringBuilder.append(StringBuilder.java:55)
+	at java.util.Formatter$FixedString.print(Formatter.java:2518)
+	at java.util.Formatter.format(Formatter.java:2421)
+	at java.util.Formatter.format(Formatter.java:2367)
+	at com.google.inject.internal.Errors.formatInjectionPoint(Errors.java:715)
+	at com.google.inject.internal.Errors.formatSource(Errors.java:678)
+	at com.google.inject.internal.Errors.format(Errors.java:555)
+	at com.google.inject.ConfigurationException.getMessage(ConfigurationException.java:70)
+	at java.lang.Throwable.getLocalizedMessage(Throwable.java:267)
+	at java.lang.Throwable.toString(Throwable.java:343)
+	at java.lang.String.valueOf(String.java:2826)
+	at java.io.PrintStream.println(PrintStream.java:771)
+	at java.lang.Throwable.printStackTrace(Throwable.java:461)
+	at java.lang.Throwable.printStackTrace(Throwable.java:451)
+	at Main.main(Main.java:30)
