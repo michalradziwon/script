@@ -1,0 +1,10 @@
+
+  package gen;
+  public class N_Gen182 {
+  		@com.google.inject.Inject
+  		public N_Gen182(N_Gen183 n_gen183){
+  			System.out.println(this.getClass().getCanonicalName() + " created. " + n_gen183 );
+  		}
+  @com.google.inject.Inject public void injectInterfaceWithoutImpl(gen.InterfaceWithoutImpl i){} // should expolode :)
+  }
+  
