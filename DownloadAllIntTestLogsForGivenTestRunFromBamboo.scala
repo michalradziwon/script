@@ -7,7 +7,7 @@ http://BAMBOO_HOST/browse/TESTSUITE02-1016/log
 log page:
 http://BAMBOO_HOST/download/TESTSUITE02/build_logs/TESTSUITE02-1016.log
 http://BAMBOO_HOST/download/TESTSUITE68/build_logs/TESTSUITE68-1016.log
-													  ^^^^^^^^^^^            ^^^^^^^^^^^
+                            ^^^^^^^^^^^            ^^^^^^^^^^^
 
 */
 
